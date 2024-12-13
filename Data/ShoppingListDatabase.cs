@@ -101,6 +101,10 @@ namespace HoosAnaLab7.Data
                 return _database.InsertAsync(slist);
             }
         }
+        public Task<int> DeleteShopAsync(Shop shop)
+        {
+            return _database.DeleteAsync(shop);
+        }
         public Task<int> DeleteShopListAsync(ShopList slist)
         {
             return _database.DeleteAsync(slist);

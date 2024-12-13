@@ -1,4 +1,4 @@
-using HoosAnaLab7.Models;
+﻿using HoosAnaLab7.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -51,7 +51,27 @@ public partial class ShopPage : ContentPage
             };
             LocalNotificationCenter.Current.Show(request);
         }
+        async void OnDeleteButtonClicked(object sender, EventArgs e)
+        {
+            var shop = (Shop)BindingContext;
+
+            // Confirmare utilizator
+            bool confirm = await DisplayAlert("Confirm Delete",
+                $"Are you sure you want to delete the shop?",
+                "Yes", "No");
+
+            if (confirm)
+            {
+                // Șterge magazinul din baza de date
+                await App.Database.DeleteShopAsync(shop);
+
+                // Navighează înapoi
+                await Navigation.PopAsync();
+            }
+        }
+
 
         await Map.OpenAsync(shoplocation, options);
         }
+    
         }
